@@ -1,17 +1,18 @@
+import 'package:favorite_places/models/place.dart';
+import 'package:favorite_places/providers/place_list_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
-class AddPlace extends StatefulWidget {
+class AddPlace extends ConsumerWidget {
   const AddPlace({super.key});
 
   @override
-  State<AddPlace> createState() {
-    return _AddPlaceState();
-  }
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    void addPlaceList(Place place) {
+      ref.read(placeListProvider.notifier).addPlace(place);
+    }
 
-class _AddPlaceState extends State<AddPlace> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add new Place'),
@@ -38,7 +39,7 @@ class _AddPlaceState extends State<AddPlace> {
                     width: 10,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: (){addPlaceList(place)},
                     child: const Text('Save'),
                   )
                 ])
