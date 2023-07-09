@@ -1,4 +1,5 @@
 import 'package:favorite_places/screens/addPlace.dart';
+import 'package:favorite_places/widget/list_of_places.dart';
 import 'package:flutter/material.dart';
 
 class YourPlaces extends StatefulWidget {
@@ -31,13 +32,7 @@ class _YourPlacesState extends State<YourPlaces> {
           ),
         ],
       ),
-      body: Center(
-        child: Text(
-          'No places added yet.',
-          style:
-              Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 20),
-        ),
-      ),
+      body: const ListOfPlaces(),
     );
   }
 }

@@ -1,15 +1,15 @@
-import 'package:favorite_places/models/place.dart';
+import 'package:favorite_places/widget/place_widget.dart';
 import 'package:riverpod/riverpod.dart';
 
-class PlaceNotifier extends StateNotifier<List<Place>> {
+class PlaceNotifier extends StateNotifier<List<PlaceWidget>> {
   PlaceNotifier() : super([]);
 
-  void addPlace(Place place) {
+  void addPlace(PlaceWidget place) {
     state = [...state, place];
   }
 }
 
 final placeListProvider =
-    StateNotifierProvider<PlaceNotifier, List<Place>>((ref) {
+    StateNotifierProvider<PlaceNotifier, List<PlaceWidget>>((ref) {
   return PlaceNotifier();
 });
