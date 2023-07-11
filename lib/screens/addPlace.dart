@@ -57,6 +57,7 @@ class _AddPlaceSatate extends ConsumerState<AddPlace> {
               children: [
                 TextFormField(
                   style: Theme.of(context).textTheme.titleSmall,
+                  decoration: const InputDecoration(labelText: 'title'),
                   cursorColor: Colors.red,
                   controller: titleControler,
                   validator: (value) {
@@ -78,9 +79,10 @@ class _AddPlaceSatate extends ConsumerState<AddPlace> {
                   const SizedBox(
                     width: 10,
                   ),
-                  ElevatedButton(
+                  ElevatedButton.icon(
                     onPressed: addPlaceList,
-                    child: const Text('Save Place!'),
+                    icon: const Icon(Icons.add),
+                    label: const Text('Save Place!'),
                   )
                 ])
               ],
