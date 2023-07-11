@@ -1,4 +1,5 @@
 import 'package:favorite_places/providers/place_list_provider.dart';
+import 'package:favorite_places/widget/place_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,7 +19,7 @@ class _ListOsPlacesState extends ConsumerState<ListOfPlaces> {
 
     return ListView.builder(
       itemCount: places.length,
-      itemBuilder: (context, index) => places[index],
+      itemBuilder: (context, index) => PlaceWidget(place: places[index]),
     );
   }
 }

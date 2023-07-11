@@ -1,3 +1,4 @@
+import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/providers/place_list_provider.dart';
 import 'package:favorite_places/widget/place_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +34,7 @@ class _AddPlaceSatate extends ConsumerState<AddPlace> {
     void addPlaceList() {
       if (_formKey.currentState!.validate()) {
         ref.watch(placeListProvider.notifier).addPlace(
-              PlaceWidget(
-                id: ValueKey(titleControler.text).toString(),
+              Place(
                 title: titleControler.text,
               ),
             );
@@ -56,6 +56,8 @@ class _AddPlaceSatate extends ConsumerState<AddPlace> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 TextFormField(
+                  style: Theme.of(context).textTheme.titleSmall,
+                  cursorColor: Colors.red,
                   controller: titleControler,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
