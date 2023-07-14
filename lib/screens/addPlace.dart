@@ -1,6 +1,6 @@
 import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/providers/place_list_provider.dart';
-import 'package:favorite_places/widget/place_widget.dart';
+import 'package:favorite_places/widget/image_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,45 +47,45 @@ class _AddPlaceSatate extends ConsumerState<AddPlace> {
       appBar: AppBar(
         title: const Text('Add new Place'),
       ),
-      body: Center(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                TextFormField(
-                  style: Theme.of(context).textTheme.titleSmall,
-                  decoration: const InputDecoration(labelText: 'title'),
-                  cursorColor: Colors.red,
-                  controller: titleControler,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Write something!';
-                    }
+      body: SingleChildScrollView(
+        child: Center(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextFormField(
+                    style: Theme.of(context).textTheme.titleSmall,
+                    decoration: const InputDecoration(labelText: 'title'),
+                    cursorColor: Colors.red,
+                    controller: titleControler,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Write something!';
+                      }
 
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  TextButton(
-                    onPressed: backPage,
-                    child: const Text('Cancel'),
+                      return null;
+                    },
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: addPlaceList,
-                    icon: const Icon(Icons.add),
-                    label: const Text('Save Place!'),
-                  )
-                ])
-              ],
+                  const SizedBox(height: 12),
+                  const ImageInput(),
+                  const SizedBox(height: 12),
+                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    TextButton(
+                      onPressed: backPage,
+                      child: const Text('Cancel'),
+                    ),
+                    const SizedBox(width: 10),
+                    ElevatedButton.icon(
+                      onPressed: addPlaceList,
+                      icon: const Icon(Icons.add),
+                      label: const Text('Save Place!'),
+                    )
+                  ])
+                ],
+              ),
             ),
           ),
         ),
