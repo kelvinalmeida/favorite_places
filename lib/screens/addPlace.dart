@@ -1,8 +1,10 @@
 import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/providers/place_list_provider.dart';
 import 'package:favorite_places/widget/image_input.dart';
+import 'package:favorite_places/widget/location_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:io';
 
 class AddPlace extends ConsumerStatefulWidget {
   const AddPlace({super.key});
@@ -15,6 +17,7 @@ class AddPlace extends ConsumerStatefulWidget {
 
 class _AddPlaceSatate extends ConsumerState<AddPlace> {
   final titleControler = TextEditingController();
+  File? _selectedImage;
 
   @override
   void dispose() {
@@ -32,10 +35,11 @@ class _AddPlaceSatate extends ConsumerState<AddPlace> {
     }
 
     void addPlaceList() {
-      if (_formKey.currentState!.validate()) {
+      if (_formKey.currentState!.validate() || _selectedImage != null) {
         ref.watch(placeListProvider.notifier).addPlace(
               Place(
                 title: titleControler.text,
+                image: _selectedImage!,
               ),
             );
         // print(ref.watch(placeListProvider));
@@ -70,7 +74,11 @@ class _AddPlaceSatate extends ConsumerState<AddPlace> {
                     },
                   ),
                   const SizedBox(height: 12),
-                  const ImageInput(),
+                  ImageInput(onPickImage: (image) {
+                    _selectedImage = image;
+                  }),
+                  const SizedBox(height: 12),
+                  LocationInput(),
                   const SizedBox(height: 12),
                   Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     TextButton(

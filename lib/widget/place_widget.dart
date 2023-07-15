@@ -11,13 +11,17 @@ class PlaceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     void goToDetails() {
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => PlaceDetails(title: place.title),
+        builder: (context) => PlaceDetails(place: place),
       ));
     }
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: ListTile(
+        leading: CircleAvatar(
+          radius: 26,
+          backgroundImage: FileImage(place.image),
+        ),
         onTap: goToDetails,
         title: Text(
           place.title,
