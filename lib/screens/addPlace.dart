@@ -1,4 +1,3 @@
-import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/providers/place_list_provider.dart';
 import 'package:favorite_places/widget/image_input.dart';
 import 'package:favorite_places/widget/location_input.dart';
@@ -37,10 +36,8 @@ class _AddPlaceSatate extends ConsumerState<AddPlace> {
     void addPlaceList() {
       if (_formKey.currentState!.validate() || _selectedImage != null) {
         ref.watch(placeListProvider.notifier).addPlace(
-              Place(
-                title: titleControler.text,
-                image: _selectedImage!,
-              ),
+              titleControler.text,
+              _selectedImage!,
             );
         // print(ref.watch(placeListProvider));
         backPage();

@@ -1,17 +1,27 @@
+import 'package:favorite_places/providers/place_list_provider.dart';
 import 'package:favorite_places/screens/addPlace.dart';
 import 'package:favorite_places/widget/list_of_places.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class YourPlaces extends StatefulWidget {
+class YourPlaces extends ConsumerStatefulWidget {
   const YourPlaces({super.key});
 
   @override
-  State<YourPlaces> createState() {
+  ConsumerState<YourPlaces> createState() {
     return _YourPlacesState();
   }
 }
 
-class _YourPlacesState extends State<YourPlaces> {
+class _YourPlacesState extends ConsumerState<YourPlaces> {
+  late Future<void> _placesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _placesFuture = ref.read(placeListProvider.notifier).loadPlaces();
+  }
+
   void addNewPlace() {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -32,7 +42,14 @@ class _YourPlacesState extends State<YourPlaces> {
           ),
         ],
       ),
-      body: const ListOfPlaces(),
+      body: FutureBuilder(
+          future: _placesFuture,
+          builder: (context, snapshot) =>
+              snapshot.connectionState == ConnectionState.waiting
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : const ListOfPlaces()),
     );
   }
 }
